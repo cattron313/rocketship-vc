@@ -30,7 +30,7 @@ export const TickerSearch = ({onSelect, value, onInput}: Props) => {
 			<div className="TickerSearch-controls">
 				<input
 					value={value}
-					placeholder="APPL"
+					placeholder="Enter stock ticker"
 					onChange={(e) => onInput(e.target.value.toUpperCase())}
 				/>
 			</div>
