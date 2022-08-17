@@ -1,34 +1,25 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "./App.css";
 
-import { Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import { TickerSearch } from "./component/TickerSearch";
-
-import './App.css';
+import {StockDetails} from "./component/pages/StockDetails";
+import {ErrorPage} from './component/pages/ErrorPage';
+import MainLayout from "./component/pages/MainLayout";
 
 function App() {
-  const [searchInput, setSearchInput] = useState("");
-  const navigate = useNavigate();
-  const handleSelect = (ticker: string | undefined) => {
-    setSearchInput("");
-    navigate(`/stock/${ticker ?? ""}`);
-  };
-
-  const handleInput = (value: string) => {
-    setSearchInput(value);
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Stonks</h1>
-        <TickerSearch onSelect={handleSelect} value={searchInput} onInput={handleInput} />
-      </header>
-      <main>
-        <Outlet />
-      </main>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={null} />
+        <Route path="/stock/:tickerSymbol" element ={<StockDetails />} />
+      </Route>
+      <Route
+          path="*"
+          element={
+            <ErrorPage status={404} />
+          }
+        />
+      </Routes>
   );
 }
 
