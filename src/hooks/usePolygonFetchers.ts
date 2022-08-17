@@ -175,6 +175,8 @@ const fetchAggregates = async (
 		const data = await response.json();
 		if (data.error) {
 			alert(data.error);
+		} else if (data.count === 0) {
+			alert("No stock data available.");
 		} else {
 			const results = data.results ?? [];
 			callback({
